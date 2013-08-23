@@ -1,4 +1,13 @@
 {
+	"conditions":{
+		"termPaymentCharge" {
+		    "newOrderPayment.paymentMethod.paymentMethodType": {"eq":"termPayment"},
+		    "newOrderPayment.orderPaymentType.systemCode": {"eq":"optCharge"}
+		}
+	},
+	"properties": {
+	    "amount":				[{"lteProperty":"order.account.termAccountAvailableCredit"}]
+	},
 	"populatedPropertyValidation":{
 		"newOrderPayment":		[{"validate":false}]
 	}

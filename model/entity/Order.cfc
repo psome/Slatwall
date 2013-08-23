@@ -117,7 +117,7 @@ component displayname="Order" entityname="SlatwallOrder" table="SwOrder" persist
 	property name="paymentAmountTotal" persistent="false" hb_formatType="currency";
 	property name="paymentAmountReceivedTotal" persistent="false" hb_formatType="currency";
 	property name="paymentAmountCreditedTotal" persistent="false" hb_formatType="currency";
-	property name="paymentBalance" persistent="false" hb_formatType="currency";
+	property name="paymentAmountDue" persistent="false" hb_formatType="currency";
 	property name="paymentMethodOptionsSmartList" persistent="false";
 	property name="promotionCodeList" persistent="false";
 	property name="quantityDelivered" persistent="false";
@@ -472,11 +472,9 @@ component displayname="Order" entityname="SlatwallOrder" table="SwOrder" persist
 		
 		return totalPayments;
 	}
-
 	
-	public numeric function getPaymentBalance(){
-
-		return getPaymentAmountReceivedTotal()-getTotal()-getPaymentAmountCreditedTotal();
+	public numeric function getPaymentAmountDue(){
+		return precisionEvaluate(getTotal() - getPaymentAmountReceivedTotal() + getPaymentAmountCreditedTotal());
 	}
 	
 	public numeric function getPaymentAmountAuthorizedTotal() {
